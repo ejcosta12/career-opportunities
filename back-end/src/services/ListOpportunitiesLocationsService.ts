@@ -4,9 +4,9 @@ import Opportunities from '../models/Opportunities';
 
 class ListOpportunitiesLocationsService {
   public async execute(): Promise<Opportunities[]> {
-    const opportunities = getRepository(Opportunities);
+    const opportunitiesRepository = getRepository(Opportunities);
 
-    const listOpportunities = opportunities.find();
+    const listOpportunities = await opportunitiesRepository.find();
 
     return listOpportunities;
   }
