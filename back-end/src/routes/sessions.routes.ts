@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import CreateVisitorService from '../services/CreateVisitorService';
-import AuthenticateVisitorService from '../services/AuthenticateVisitorService';
+import SaveVisitorService from '../services/SaveVisitorService';
 
 const sessionsRouter = Router();
 
@@ -12,14 +12,14 @@ sessionsRouter.post('/', async (request, response) => {
   return response.json(visitor);
 });
 
-sessionsRouter.post('/:token', async (request, response) => {
-  const { token } = request.params;
+sessionsRouter.post('/login', async (request, response) => {
+  const authHeader = request.headers.authorization;
   const { name, email, id } = request.body;
-  const authenticateVisitorService = new AuthenticateVisitorService();
-  const visitor = await authenticateVisitorService.execute({
+  const saveVisitorService = new SaveVisitorService();
+  const visitor = await saveVisitorService.execute({
     name,
     email,
-    token,
+    authHeader,
     id,
   });
   return response.json(visitor);

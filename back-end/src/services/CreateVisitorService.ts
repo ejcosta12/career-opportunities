@@ -1,6 +1,8 @@
 import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 
+import authConfig from '../config/auth';
+
 import Visitors from '../models/Visitors';
 
 import AppError from '../errors/AppErros';
@@ -26,10 +28,12 @@ class CreateVisitorService {
     const visitor = visitorsRepository.create({ name, email });
     const idVisitor = String(Math.floor(Math.random() * 99999 + 1978));
 
-    const token = sign({}, '0132bcf807c46e82b3ba0371f0a8305c', {
+    const { secret, expiresIn } = authConfig.jwt;
+
+    const token = sign({}, secret, {
       jwtid: idVisitor,
       subject: email,
-      expiresIn: '1h',
+      expiresIn,
     });
 
     return {

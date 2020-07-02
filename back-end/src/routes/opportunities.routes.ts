@@ -4,7 +4,11 @@ import ListOpportunitiesLocationsService from '../services/ListOpportunitiesLoca
 import CreateOpportunityService from '../services/CreateOpportunityService';
 import DeleteOpportunityService from '../services/DeleteOpportunityService';
 
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 const opportunitiesRouter = Router();
+
+opportunitiesRouter.use(ensureAuthenticated);
 
 opportunitiesRouter.get('/', async (request, response) => {
   const listOpportunitiesLocationsService = new ListOpportunitiesLocationsService();
