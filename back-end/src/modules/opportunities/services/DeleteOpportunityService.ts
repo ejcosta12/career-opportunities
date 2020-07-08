@@ -1,7 +1,8 @@
 import { getRepository } from 'typeorm';
 
-import Opportunities from '../models/Opportunities';
-import AppError from '../errors/AppErros';
+import Opportunities from '@modules/opportunities/infra/typeorm/entities/Opportunities';
+
+import AppError from '@shared/errors/AppErros';
 
 class DeleteOpportunitiesService {
   public async execute(id: string): Promise<any> {

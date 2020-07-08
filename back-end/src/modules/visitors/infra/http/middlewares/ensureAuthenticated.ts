@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import authConfig from '../config/auth';
+import authConfig from '@config/auth';
 
-import AppError from '../errors/AppErros';
+import AppError from '@shared/errors/AppErros';
 
 interface RequestQuery {
   idToken?: string;

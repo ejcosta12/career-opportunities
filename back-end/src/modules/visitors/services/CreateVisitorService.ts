@@ -1,11 +1,11 @@
 import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 
-import authConfig from '../config/auth';
+import authConfig from '@config/auth';
 
-import Visitors from '../models/Visitors';
+import Visitors from '@modules/visitors/infra/typeorm/entities/Visitors';
 
-import AppError from '../errors/AppErros';
+import AppError from '@shared/errors/AppErros';
 
 interface Request {
   name: string;

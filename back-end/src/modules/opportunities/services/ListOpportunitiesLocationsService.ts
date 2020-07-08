@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import Opportunities from '../models/Opportunities';
+import Opportunities from '@modules/opportunities/infra/typeorm/entities/Opportunities';
 
 class ListOpportunitiesLocationsService {
   public async execute(): Promise<Opportunities[]> {

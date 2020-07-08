@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
 
-import Opportunities from '../models/Opportunities';
+import Opportunities from '@modules/opportunities/infra/typeorm/entities/Opportunities';
 
-import AppError from '../errors/AppErros';
+import AppError from '@shared/errors/AppErros';
 
 interface Request {
   name: string;

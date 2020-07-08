@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import ListOpportunitiesLocationsService from '../services/ListOpportunitiesLocationsService';
-import CreateOpportunityService from '../services/CreateOpportunityService';
-import DeleteOpportunityService from '../services/DeleteOpportunityService';
+import ListOpportunitiesLocationsService from '@modules/opportunities/services/ListOpportunitiesLocationsService';
+import CreateOpportunityService from '@modules/opportunities/services/CreateOpportunityService';
+import DeleteOpportunityService from '@modules/opportunities/services/DeleteOpportunityService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/visitors/infra/http/middlewares/ensureAuthenticated';
 
 const opportunitiesRouter = Router();
 

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import CreateVisitorService from '../services/CreateVisitorService';
-import SaveVisitorService from '../services/SaveVisitorService';
+import CreateVisitorService from '@modules/visitors/services/CreateVisitorService';
+import SaveVisitorService from '@modules/visitors/services/SaveVisitorService';
 
 const sessionsRouter = Router();
 
