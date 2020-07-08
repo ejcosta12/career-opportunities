@@ -1,11 +1,13 @@
 import React from 'react';
+import { Header, Main } from '../../components/'
 
 const OpportunityPanel: React.FC = () => {
 
   return (
-    <div>
-      Teste Rota /
-    </div>
+    <>
+      <Header/>
+      <Main/>
+    </>
   );
 }
 
