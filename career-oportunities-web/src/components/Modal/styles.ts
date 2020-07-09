@@ -11,15 +11,19 @@ export const Container = styled.div`
   > div {
     margin-top: 60px;
     background: #ffffff;
-    width: 35%;
-    height: 45%;
+    width: 500px;
+    height: 350px;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    @media screen and (max-width: 768px) {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
   }
 
   @media screen and (max-width: 768px) {
