@@ -6,6 +6,7 @@ type HeaderProps = AreaHTMLAttributes<HTMLHeadElement>;
 
 const Header: React.FC<HeaderProps> = ({children, ...props}) => (
   <Container {...props}>
+    <h3> Maximize sua Carreira </h3>
     {children}
   </Container>
 );
