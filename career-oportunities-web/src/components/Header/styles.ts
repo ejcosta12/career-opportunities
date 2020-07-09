@@ -6,9 +6,24 @@ export const Container = styled.header`
   color: white;
   display: flex;
   align-items: center;
-  place-content: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    margin-left: 20px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 15pt;
+  }
 
   @media screen and (max-width: 768px) {
-    height: 10vh;
+
   }
 `;
