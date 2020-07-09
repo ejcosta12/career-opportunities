@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  background: black;
-  color: white;
+  display: flex;
+  height: 92vh;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
