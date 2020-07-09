@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Main, Button } from '../../components/'
+import { Header, Main, Button, Modal } from '../../components/'
 
 import { Container } from './styles';
 
@@ -7,6 +7,7 @@ const OpportunityPanel: React.FC = () => {
 
   return (
     <Container>
+      <Modal/>
       <Header/>
       <Main>
         <div className="area1">
