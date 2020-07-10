@@ -15,9 +15,8 @@ const Modal: React.FC<ModalProps> = ({...props}) => {
         { !statusForm &&
           <Form>
             <div>
-              <Input> Nome Completo </Input>
-              <label> Email </label>
-              <input placeholder="E-mail"/>
+              <Input name="Nome Completo"/>
+              <Input name="E-mail"/>
             </div>
             <Button onClick={() => setStatusForm(true)}>Continuar</Button>
           </Form>
@@ -25,8 +24,7 @@ const Modal: React.FC<ModalProps> = ({...props}) => {
         { statusForm && 
           <Form>
             <div>
-              <label> Token de acesso </label>
-              <input placeholder="Token de acesso"/>
+              <Input name="Token de acesso"/>
             </div>
             <Button onClick={() => setStatusForm(false)}>Continuar</Button>
           </Form>

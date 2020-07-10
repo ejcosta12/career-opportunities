@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Header, Main, Button, Modal } from '../../components/'
 
 import { Container } from './styles';
@@ -28,46 +30,46 @@ const OpportunityPanel: React.FC = () => {
         <div className="area2">
           <div>
             <h4> Belo Horizonte </h4>
-            <div>
+            <Link key="123" to={`/details/id`} >
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
-            <div>
+            </Link>
+            <Link to="/">
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
-            <div>
+            </Link>
+            <a>
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
+            </a>
           </div>
           <div>
             <h4> Belo Horizonte </h4>
-            <div>
+            <a>
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
+            </a>
           </div>
           <div>
             <h4> Belo Horizonte </h4>
-            <div>
+            <a>
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
+            </a>
           </div>
           <div>
             <h4> Belo Horizonte </h4>
-            <div>
+            <a>
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
+            </a>
           </div>
           <div>
             <h4> Belo Horizonte </h4>
-            <div>
+            <a>
               <p> Engenheiro de Software </p>
               <h3> 30 Vagas </h3>
-            </div>
+            </a>
           </div>
         </div>
       </Main>

@@ -48,21 +48,26 @@ export const Container = styled.div`
   overflow-y: auto;
   div {
     width: 100%;
-    margin-bottom: 50px;
+    & + div {
+      margin-top: 50px;
+    }
     h4 {
       margin-bottom: 40px;
     }
-    div {
+    a {
+      text-decoration: none;
       color: #495057;
-      cursor: pointer;
       background: #ffffff;
       width: 100%;
       height: 60px;
       display: flex;
       padding: 10px;
-      margin-bottom: 10px;
       justify-content: space-between;
       align-items: center;
+
+      & + a {
+        margin-top: 10px;
+      }
     }
   }
   @media screen and (max-width: 768px) {

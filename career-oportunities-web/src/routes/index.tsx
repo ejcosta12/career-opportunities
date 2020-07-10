@@ -8,7 +8,7 @@ import '../styles/global';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={OpportunityPanel}/>
-    <Route path="/details" component={DetailOpportunity}/>
+    <Route path="/details/:id" component={DetailOpportunity}/>
   </Switch>
 )
 export default Routes;

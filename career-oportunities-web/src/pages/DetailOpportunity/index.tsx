@@ -1,9 +1,11 @@
 import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import { Header, Main, Button, Modal } from '../../components/'
 
 import { Container } from './styles';
 
 const DetailOpportunity: React.FC = () => {
+  const { params } = useRouteMatch();
 
   return (
     <Container>

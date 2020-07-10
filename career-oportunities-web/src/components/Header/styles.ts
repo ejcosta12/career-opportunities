@@ -10,12 +10,13 @@ export const Container = styled.header`
   padding-left: 20px;
   padding-right: 20px;
 
-  div {
+  div, a {
     display: flex;
     align-items: center;
+    text-decoration: none;
   }
 
-  button {
+  p {
     margin-left: 20px;
     background: none;
     border: none;
