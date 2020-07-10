@@ -1,11 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-import { Header, Main, Button, Modal } from '../../components/'
+import { Header, Main, Button, Modal } from '../../components/';
+
+import api from '../../services/api';
 
 import { Container } from './styles';
 
+interface Opportunitie {
+  uuId: string;
+  name: string;
+  description: string;
+  local: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Params {
+  tokenJWT: string;
+  tokenUser: string;
+}
+
 const OpportunityPanel: React.FC = () => {
+  const { params } = useRouteMatch<Params>();
+  const [opportunities, setOpportunities] = useState<Opportunitie[]>([]);
+
+  useEffect(() => {
+    async function loadOpportunities () {
+      const response = await api.get(`/opportunities/${params.tokenJWT}`, {
+        params: {
+          token: params.tokenUser,
+        },
+      })
+      const allOpportunities: Opportunitie[] = response.data;
+      setOpportunities(allOpportunities);
+    };
+
+    loadOpportunities();
+  }, []);
+
 
   return (
     <Container>
@@ -28,6 +61,15 @@ const OpportunityPanel: React.FC = () => {
           </div>
         </div>
         <div className="area2">
+          { opportunities.map( opportunitie => (
+            <div>
+              <h4> {opportunitie.local} </h4>
+              <Link key="123" to={`/details/id`} >
+                <p> {opportunitie.name} </p>
+                <h3> 30 Vagas </h3>
+              </Link>
+            </div>
+          ))}
           <div>
             <h4> Belo Horizonte </h4>
             <Link key="123" to={`/details/id`} >
