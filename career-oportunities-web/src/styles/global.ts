@@ -9,7 +9,10 @@ export default createGlobalStyle`
   }
   body {
     background: #F6F6F6;
-    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body, input, button {
+    font: 16px, Roboto, sans-serif;
   }
   button {
     cursor: pointer;
