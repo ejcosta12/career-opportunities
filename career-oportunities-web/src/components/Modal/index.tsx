@@ -1,6 +1,6 @@
 import React, {useState, AreaHTMLAttributes} from 'react';
 
-import { Button, Form } from '../index'
+import { Button, Form, Input } from '../index'
 
 import { Container } from './styles';
 
@@ -15,8 +15,7 @@ const Modal: React.FC<ModalProps> = ({...props}) => {
         { !statusForm &&
           <Form>
             <div>
-              <label> Nome Completo </label>
-              <input placeholder="Nome Completo"/>
+              <Input> Nome Completo </Input>
               <label> Email </label>
               <input placeholder="E-mail"/>
             </div>

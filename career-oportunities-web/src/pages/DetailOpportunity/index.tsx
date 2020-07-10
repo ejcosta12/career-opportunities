@@ -16,6 +16,9 @@ const DetailOpportunity: React.FC = () => {
             <p> 30 vagas </p>
             <div>
               <h2> Quem Somos </h2>
+              <p> Nascida em Belo Horizonte.</p>
+              <h2> Descrição </h2>
+              <p> Desenvolvimento de sistemas, atuar na...</p>
             </div>
           </div>
         </div>

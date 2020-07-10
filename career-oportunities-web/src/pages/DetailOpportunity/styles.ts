@@ -12,6 +12,9 @@ export const Container = styled.div`
         margin-bottom: 40px;
         color: blue;
       }
+      * {
+        margin-top: 20px;
+      }
     }
     @media screen and (max-width: 768px) {
       overflow: visible;
