@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Header, Main, Button, Modal } from '../../components/';
+import { Header, Main, Button, Modal } from "../../components/";
 
 import api from '../../services/api';
 
