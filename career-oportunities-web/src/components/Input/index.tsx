@@ -1,16 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, InputHTMLAttributes } from 'react';
 
 import { Container } from './styles';
 
-interface InputProps {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
 };
 
-const Input: React.FC<InputProps> = ({name}) => {
-  const [ placeHolderInput, setPlaceHolderInput ] = useState(name);
-  const [ valueLabel, setValueLabel ] = useState('')
+const Input: React.FC<IInputProps> = ({ name, ...rest }) => {
 
-  function handleClick() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [ placeHolderInput, setPlaceHolderInput ] = useState(name);
+  const [ valueLabel, setValueLabel ] = useState('');
+
+  function handleFocus() {
     setValueLabel(name);
     setPlaceHolderInput('');
   };
@@ -23,10 +26,12 @@ const Input: React.FC<InputProps> = ({name}) => {
   return (
     <Container valueLabel={valueLabel}>
       <label>{valueLabel}</label>
-      <input 
+      <input
         placeholder={ placeHolderInput } 
-        onClick={() => handleClick()} 
+        onFocus={() => handleFocus()} 
         onBlur={() => handleBlur()}
+        ref={inputRef}
+        {...rest}
       />
     </Container>
   );

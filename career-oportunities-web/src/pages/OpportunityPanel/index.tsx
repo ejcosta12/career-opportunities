@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Header, Main, Button, Modal } from '../../components/';
 
 import api from '../../services/api';
 
 import { Container } from './styles';
+
+interface Visitor {
+  token: string;
+  idVisitor: number;
+}
 
 interface Opportunitie {
   uuId: string;
@@ -16,33 +21,57 @@ interface Opportunitie {
   updated_at: string;
 }
 
-interface Params {
-  tokenJWT: string;
-  tokenUser: string;
-}
-
 const OpportunityPanel: React.FC = () => {
-  const { params } = useRouteMatch<Params>();
   const [opportunities, setOpportunities] = useState<Opportunitie[]>([]);
+  const [modal, setModal] = useState(false);
+  const [visitor, setVisitor] = useState<Visitor>();
+
+  useEffect(() => {
+    const idVisitor = Number(localStorage.getItem('@id_visitor'))
+    const token = localStorage.getItem('@token_visitor')
+
+    if (!!idVisitor && !!token) {
+      setVisitor({ idVisitor, token });
+      setModal(true);
+    }
+  }, [])
+
 
   useEffect(() => {
     async function loadOpportunities () {
-      const response = await api.get(`/opportunities/${params.tokenJWT}`, {
-        params: {
-          token: params.tokenUser,
-        },
-      })
-      const allOpportunities: Opportunitie[] = response.data;
-      setOpportunities(allOpportunities);
+      try {
+        if (!!visitor) {
+          const response = await api.get(`/opportunities/`, {
+            headers: {
+              'Authorization': `Bearer ${visitor.token}`,
+            },
+            params: {
+              idToken: visitor.idVisitor,
+            },
+          })
+          const allOpportunities: Opportunitie[] = response.data;
+          setOpportunities(allOpportunities);
+        }
+      } catch (error) {
+        setModal(false);
+      }
     };
-
     loadOpportunities();
-  }, []);
+  }, [visitor]);
 
+  function isModal({idVisitor, token}: Visitor) {
+    setVisitor({ idVisitor, token });
+    setModal(true)
+    localStorage.setItem('@token_visitor', token);
+    localStorage.setItem('@id_visitor', String(idVisitor));
+  }
 
   return (
     <Container>
-      <Modal/>
+      {
+        !modal && 
+        <Modal isModal={isModal}/>
+      }
       <Header/>
       <Main>
         <div className="area1">
@@ -62,57 +91,14 @@ const OpportunityPanel: React.FC = () => {
         </div>
         <div className="area2">
           { opportunities.map( opportunitie => (
-            <div>
+            <div key={opportunitie.uuId}>
               <h4> {opportunitie.local} </h4>
-              <Link key="123" to={`/details/id`} >
+              <Link to={`/details/id`} >
                 <p> {opportunitie.name} </p>
                 <h3> 30 Vagas </h3>
               </Link>
             </div>
           ))}
-          <div>
-            <h4> Belo Horizonte </h4>
-            <Link key="123" to={`/details/id`} >
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </Link>
-            <Link to="/">
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </Link>
-            <a>
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </a>
-          </div>
-          <div>
-            <h4> Belo Horizonte </h4>
-            <a>
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </a>
-          </div>
-          <div>
-            <h4> Belo Horizonte </h4>
-            <a>
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </a>
-          </div>
-          <div>
-            <h4> Belo Horizonte </h4>
-            <a>
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </a>
-          </div>
-          <div>
-            <h4> Belo Horizonte </h4>
-            <a>
-              <p> Engenheiro de Software </p>
-              <h3> 30 Vagas </h3>
-            </a>
-          </div>
         </div>
       </Main>
     </Container>
