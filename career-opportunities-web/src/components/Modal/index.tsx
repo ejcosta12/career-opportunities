@@ -1,10 +1,10 @@
-import React, {useState, AreaHTMLAttributes} from 'react';
+import React, { useState, AreaHTMLAttributes } from 'react';
 
-import {  } from 'react-router-dom';
+// import {  } from 'react-router-dom';
 
 import api from '../../services/api';
 
-import { Button, Form, Input } from '../index'
+import { Button, Form, Input } from '../index';
 
 import { Container } from './styles';
 
@@ -16,25 +16,29 @@ interface Visitor {
 }
 
 interface IModalProps extends AreaHTMLAttributes<HTMLDivElement> {
-  isModal: ({}: Visitor) => void;
-};
+  isModal: ({
+    email,
+    idVisitor,
+    name,
+    token,
+  }:Visitor) => void;
+}
 
-const Modal: React.FC<IModalProps> = ({isModal, ...rest}) => {
-
-  const [ statusForm, setStatusForm ] = useState(false);
-  const [ visitor, setVisitor] = useState<Visitor>();
-  const [ valueInputName, setValueInputName ] = useState('');
-  const [ valueInputEmail, setValueInputEmail ] = useState('');
-  const [ valueInputToken, setValueInputToken ] = useState('');
+const Modal: React.FC<IModalProps> = ({ isModal, ...rest }) => {
+  const [statusForm, setStatusForm] = useState(false);
+  const [visitor, setVisitor] = useState<Visitor>();
+  const [valueInputName, setValueInputName] = useState('');
+  const [valueInputEmail, setValueInputEmail] = useState('');
+  const [valueInputToken, setValueInputToken] = useState('');
 
   async function createVisitor(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     e.preventDefault();
     const response = await api.post('/sessions', {
       name: valueInputName,
-      email: valueInputEmail
-    })
+      email: valueInputEmail,
+    });
     const visitorData = response.data as Visitor;
     setVisitor(visitorData);
     alert(`Seu Token para acesso é: ${visitorData.idVisitor}`);
@@ -42,23 +46,23 @@ const Modal: React.FC<IModalProps> = ({isModal, ...rest}) => {
   }
 
   async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ) {
     e.preventDefault();
     try {
-      if (!!visitor) {
+      if (visitor) {
         const response = await api.post(
-          `/sessions/login`, 
+          '/sessions/login',
           {
             name: valueInputName,
             email: valueInputEmail,
-            id: valueInputToken
-          }, 
+            id: valueInputToken,
+          },
           {
             headers: {
-              'Authorization': `Bearer ${visitor.token}`,
+              Authorization: `Bearer ${visitor.token}`,
             },
-          }
+          },
         );
         if (response.status === 200) {
           isModal(visitor);
@@ -72,7 +76,7 @@ const Modal: React.FC<IModalProps> = ({isModal, ...rest}) => {
     <Container {...rest}>
       <div>
         <h1> Dados para acesso </h1>
-        { !statusForm &&
+        { !statusForm && (
           <Form>
             <div>
               <Input
@@ -89,12 +93,12 @@ const Modal: React.FC<IModalProps> = ({isModal, ...rest}) => {
             </div>
             <Button onClick={(e) => createVisitor(e)}>Continuar</Button>
           </Form>
-        }
-        { statusForm && 
+        )}
+        { statusForm && (
           <Form onSubmit={(e) => handleSubmit(e)}>
             <div>
               <Input
-                autoFocus={true}
+                autoFocus={!false}
                 name="Token de acesso"
                 value={valueInputToken}
                 onChange={(e) => setValueInputToken(e.target.value)}
@@ -102,7 +106,7 @@ const Modal: React.FC<IModalProps> = ({isModal, ...rest}) => {
             </div>
             <Button type="submit"> Continuar </Button>
           </Form>
-        }
+        )}
       </div>
     </Container>
   );

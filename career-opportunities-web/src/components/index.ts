@@ -11,5 +11,5 @@ export {
   Main,
   Modal,
   Form,
-  Input
+  Input,
 };

@@ -14,18 +14,18 @@ export const Container = styled.div<Props>`
     margin-bottom: 20px;
     color: #0072ff;
   }
-  label {
+  span {
     width: 80%;
     text-align: left;
     color: #0072ff;
   }
 
-${({valueLabel}) => !!valueLabel && css`
+${({ valueLabel }) => !!valueLabel && css`
     input {
       border-color: #0072ff;
       border-width: 3pt;
     }
-` }
+`}
 
   @media screen and (max-width: 768px) {
 

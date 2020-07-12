@@ -1,6 +1,11 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { Header, Main, Button, Modal } from '../../components/'
+import {
+  Header,
+  Main,
+  Button,
+  Modal,
+} from '../../components';
 
 import { Container } from './styles';
 
@@ -9,7 +14,7 @@ const DetailOpportunity: React.FC = () => {
 
   return (
     <Container>
-      <Header/>
+      <Header />
       <Main className="main">
         <div className="area1">
           <div>
@@ -24,11 +29,10 @@ const DetailOpportunity: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="area2">
-        </div>
+        <div className="area2" />
       </Main>
     </Container>
   );
-}
+};
 
 export default DetailOpportunity;

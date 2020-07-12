@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Header, Main, Button, Modal } from "../../components/";
+import {
+  Header,
+  Main,
+  Button,
+  Modal,
+} from '../../components';
 
 import api from '../../services/api';
 
@@ -27,41 +32,40 @@ const OpportunityPanel: React.FC = () => {
   const [visitor, setVisitor] = useState<Visitor>();
 
   useEffect(() => {
-    const idVisitor = Number(localStorage.getItem('@id_visitor'))
-    const token = localStorage.getItem('@token_visitor')
+    const idVisitor = Number(localStorage.getItem('@id_visitor'));
+    const token = localStorage.getItem('@token_visitor');
 
     if (!!idVisitor && !!token) {
       setVisitor({ idVisitor, token });
       setModal(true);
     }
-  }, [])
-
+  }, []);
 
   useEffect(() => {
-    async function loadOpportunities () {
+    async function loadOpportunities() {
       try {
-        if (!!visitor) {
-          const response = await api.get(`/opportunities/`, {
+        if (visitor) {
+          const response = await api.get('/opportunities/', {
             headers: {
-              'Authorization': `Bearer ${visitor.token}`,
+              Authorization: `Bearer ${visitor.token}`,
             },
             params: {
               idToken: visitor.idVisitor,
             },
-          })
+          });
           const allOpportunities: Opportunitie[] = response.data;
           setOpportunities(allOpportunities);
         }
       } catch (error) {
         setModal(false);
       }
-    };
+    }
     loadOpportunities();
   }, [visitor]);
 
-  function isModal({idVisitor, token}: Visitor) {
+  function isModal({ idVisitor, token }: Visitor) {
     setVisitor({ idVisitor, token });
-    setModal(true)
+    setModal(true);
     localStorage.setItem('@token_visitor', token);
     localStorage.setItem('@id_visitor', String(idVisitor));
   }
@@ -69,10 +73,9 @@ const OpportunityPanel: React.FC = () => {
   return (
     <Container>
       {
-        !modal && 
-        <Modal isModal={isModal}/>
+        !modal && <Modal isModal={isModal} />
       }
-      <Header/>
+      <Header />
       <Main>
         <div className="area1">
           <div>
@@ -81,7 +84,7 @@ const OpportunityPanel: React.FC = () => {
               Oportunidades
             </h1>
             <p>
-              Você pode se candidatar para vagas abertas ou cadastrar seu 
+              Você pode se candidatar para vagas abertas ou cadastrar seu
               currículo para futuras oportunidades.
             </p>
             <Button>
@@ -90,11 +93,15 @@ const OpportunityPanel: React.FC = () => {
           </div>
         </div>
         <div className="area2">
-          { opportunities.map( opportunitie => (
+          { opportunities.map((opportunitie) => (
             <div key={opportunitie.uuId}>
-              <h4> {opportunitie.local} </h4>
-              <Link to={`/details/id`} >
-                <p> {opportunitie.name} </p>
+              <h4>
+                {opportunitie.local}
+              </h4>
+              <Link to="/details/id">
+                <p>
+                  {opportunitie.name}
+                </p>
                 <h3> 30 Vagas </h3>
               </Link>
             </div>
@@ -103,6 +110,6 @@ const OpportunityPanel: React.FC = () => {
       </Main>
     </Container>
   );
-}
+};
 
 export default OpportunityPanel;
