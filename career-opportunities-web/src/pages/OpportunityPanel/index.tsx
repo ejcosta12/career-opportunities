@@ -5,7 +5,7 @@ import {
   Header,
   Main,
   Button,
-  Modal,
+  ModalAddVisitor,
 } from '../../components';
 
 import api from '../../services/api';
@@ -73,7 +73,7 @@ const OpportunityPanel: React.FC = () => {
   return (
     <Container>
       {
-        !modal && <Modal isModal={isModal} />
+        !modal && <ModalAddVisitor isModal={isModal} />
       }
       <Header />
       <Main>

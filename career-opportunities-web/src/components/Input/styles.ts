@@ -7,7 +7,7 @@ interface Props {
 export const Container = styled.div<Props>`
 
   input {
-    width: 80%;
+    width: 100%;
     height: 40px;
     border: none;
     border-bottom: 2pt solid #686e78;
@@ -15,7 +15,7 @@ export const Container = styled.div<Props>`
     color: #0072ff;
   }
   span {
-    width: 80%;
+    width: 100%;
     text-align: left;
     color: #0072ff;
   }

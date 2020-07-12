@@ -1,10 +1,10 @@
 import React, { useState, AreaHTMLAttributes } from 'react';
 
-// import {  } from 'react-router-dom';
+import { Form } from '@unform/web';
 
 import api from '../../services/api';
 
-import { Button, Form, Input } from '../index';
+import { Button, Input } from '../index';
 
 import { Container } from './styles';
 
@@ -24,39 +24,37 @@ interface IModalProps extends AreaHTMLAttributes<HTMLDivElement> {
   }:Visitor) => void;
 }
 
-const Modal: React.FC<IModalProps> = ({ isModal, ...rest }) => {
+const ModalAddVisitor: React.FC<IModalProps> = ({ isModal, ...rest }) => {
   const [statusForm, setStatusForm] = useState(false);
   const [visitor, setVisitor] = useState<Visitor>();
-  const [valueInputName, setValueInputName] = useState('');
-  const [valueInputEmail, setValueInputEmail] = useState('');
-  const [valueInputToken, setValueInputToken] = useState('');
+  const [valueName, setValueName] = useState('');
+  const [valueEmail, setValueEmail] = useState('');
 
-  async function createVisitor(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) {
-    e.preventDefault();
+  async function createVisitor({ name, email }: Omit<Visitor, 'idVisitor'|'token'>) {
+    if (!email || !name) {
+      alert('Preencha todos os campos.');
+    }
     const response = await api.post('/sessions', {
-      name: valueInputName,
-      email: valueInputEmail,
+      name,
+      email,
     });
     const visitorData = response.data as Visitor;
+    setValueName(name);
+    setValueEmail(email);
     setVisitor(visitorData);
     alert(`Seu Token para acesso é: ${visitorData.idVisitor}`);
     setStatusForm(true);
   }
 
-  async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>,
-  ) {
-    e.preventDefault();
+  async function handleSubmit({ token }: Omit<Visitor, 'idVisitor'|'email'|'name'>) {
     try {
       if (visitor) {
         const response = await api.post(
           '/sessions/login',
           {
-            name: valueInputName,
-            email: valueInputEmail,
-            id: valueInputToken,
+            name: valueName,
+            email: valueEmail,
+            id: token,
           },
           {
             headers: {
@@ -69,7 +67,7 @@ const Modal: React.FC<IModalProps> = ({ isModal, ...rest }) => {
         }
       }
     } catch (error) {
-      alert('O token digitado está incorreto, tente novamente ou atualize a página para gerar outro.')
+      alert('O token digitado está incorreto, tente novamente ou atualize a página para gerar outro.');
     }
   }
   return (
@@ -77,31 +75,27 @@ const Modal: React.FC<IModalProps> = ({ isModal, ...rest }) => {
       <div>
         <h1> Dados para acesso </h1>
         { !statusForm && (
-          <Form>
+          <Form onSubmit={createVisitor}>
             <div>
               <Input
-                name="Nome Completo"
-                value={valueInputName}
-                onChange={(e) => setValueInputName(e.target.value)}
+                nameLabel="Nome Completo"
+                name="name"
               />
               <Input
+                nameLabel="E-mail"
                 type="email"
-                name="E-mail"
-                value={valueInputEmail}
-                onChange={(e) => setValueInputEmail(e.target.value)}
+                name="email"
               />
             </div>
-            <Button onClick={(e) => createVisitor(e)}>Continuar</Button>
+            <Button type="submit">Continuar</Button>
           </Form>
         )}
         { statusForm && (
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={handleSubmit} initialData={{ token: '' }}>
             <div>
               <Input
-                autoFocus={!false}
-                name="Token de acesso"
-                value={valueInputToken}
-                onChange={(e) => setValueInputToken(e.target.value)}
+                nameLabel="Token de acesso"
+                name="token"
               />
             </div>
             <Button type="submit"> Continuar </Button>
@@ -112,4 +106,4 @@ const Modal: React.FC<IModalProps> = ({ isModal, ...rest }) => {
   );
 };
 
-export default Modal;
+export default ModalAddVisitor;

@@ -3,8 +3,6 @@ import { useRouteMatch } from 'react-router-dom';
 import {
   Header,
   Main,
-  Button,
-  Modal,
 } from '../../components';
 
 import { Container } from './styles';

@@ -8,6 +8,31 @@ export const Container = styled.div`
   display: flex;
   place-content: center;
 
+  form {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    button {
+      margin-top: 10px;
+      background: #0072ff;
+      color: #ffffff;
+    }
+    @media screen and (max-width: 768px) {
+      
+    }
+  }
+
   > div {
     margin-top: 60px;
     background: #ffffff;
