@@ -20,6 +20,9 @@ class Opportunities {
   @Column()
   local: string
 
+  @Column()
+  quantity: number
+
   @CreateDateColumn()
   created_at: Date;
 

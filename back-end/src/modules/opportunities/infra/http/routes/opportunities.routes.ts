@@ -17,9 +17,19 @@ opportunitiesRouter.get('/', async (request, response) => {
 });
 
 opportunitiesRouter.post('/', async (request, response) => {
-  const { name, description, local } = request.body;
+  const {
+    name,
+    description,
+    local,
+    quantity,
+  } = request.body;
   const createOpportunityService = new CreateOpportunityService();
-  const opportunity = await createOpportunityService.execute({ name, description, local });
+  const opportunity = await createOpportunityService.execute({
+    name,
+    description,
+    local,
+    quantity,
+  });
   return response.json(opportunity);
 });
 
