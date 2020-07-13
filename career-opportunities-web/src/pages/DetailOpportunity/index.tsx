@@ -1,34 +1,76 @@
-import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import {
   Header,
   Main,
 } from '../../components';
 
+import api from '../../services/api';
+
 import { Container } from './styles';
 
+interface UrlParams {
+  id: string;
+}
+
+interface Opportunity {
+  uuId: string;
+  name: string;
+  description: string;
+  quantity: number;
+  local: string;
+}
+
 const DetailOpportunity: React.FC = () => {
-  const { params } = useRouteMatch();
+  const { params } = useRouteMatch<UrlParams>();
+  const history = useHistory();
+  const [opportunity, setOpportunity] = useState<Opportunity>();
+
+  useEffect(() => {
+    async function loadOpportunity() {
+      const idVisitor = Number(localStorage.getItem('@id_visitor'));
+      const token = localStorage.getItem('@token_visitor');
+      try {
+        const dataOpportunity = await api.get(`/opportunities/${params.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            idToken: idVisitor,
+          },
+        });
+        setOpportunity(dataOpportunity.data);
+      } catch (error) {
+        history.push('/');
+      }
+    }
+    loadOpportunity();
+  }, [params, history]);
 
   return (
     <Container>
       <Header />
-      <Main className="main">
-        <div className="area1">
-          <div>
-            <h4> Belo Horizonte, MG </h4>
-            <h1> Engenherio(a) de Software</h1>
-            <p> 30 vagas </p>
+      { opportunity && (
+        <Main className="main">
+          <div className="area1">
             <div>
-              <h2> Quem Somos </h2>
-              <p> Nascida em Belo Horizonte.</p>
-              <h2> Descrição </h2>
-              <p> Desenvolvimento de sistemas, atuar na...</p>
+              <h4>{opportunity.local}</h4>
+              <h1>{opportunity.name}</h1>
+              <p>
+                { opportunity.quantity > 1
+                  ? `${opportunity.quantity} vagas`
+                  : `${opportunity.quantity} vaga`}
+              </p>
+              <div>
+                <h2> Quem Somos </h2>
+                <p> Nascida em Belo Horizonte.</p>
+                <h2>{opportunity.description}</h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="area2" />
-      </Main>
+          <div className="area2" />
+        </Main>
+      )}
     </Container>
   );
 };

@@ -17,7 +17,7 @@ interface Visitor {
   idVisitor: number;
 }
 
-interface Opportunitie {
+interface Opportunity {
   uuId: string;
   name: string;
   description: string;
@@ -27,7 +27,7 @@ interface Opportunitie {
 
 interface Opportunities {
   local: string;
-  opportunities: Opportunitie[];
+  opportunities: Opportunity[];
 }
 
 const OpportunityPanel: React.FC = () => {
@@ -102,15 +102,15 @@ const OpportunityPanel: React.FC = () => {
               <h4>
                 {value.local}
               </h4>
-              { value.opportunities.map((opportunitie) => (
-                <Link to="/details/id" key={opportunitie.uuId}>
+              { value.opportunities.map((opportunity) => (
+                <Link to={`/details/${opportunity.uuId}`} key={opportunity.uuId}>
                   <p>
-                    {opportunitie.name}
+                    {opportunity.name}
                   </p>
                   <h3>
-                    {opportunitie.quantity > 1
-                      ? `${opportunitie.quantity} vagas`
-                      : `${opportunitie.quantity} vaga`}
+                    {opportunity.quantity > 1
+                      ? `${opportunity.quantity} vagas`
+                      : `${opportunity.quantity} vaga`}
                   </h3>
                 </Link>
               ))}
