@@ -28,7 +28,7 @@ interface Opportunity {
 const DetailOpportunity: React.FC = () => {
   const { params } = useRouteMatch<UrlParams>();
   const history = useHistory();
-  const [opportunity, setOpportunity] = useState<Opportunity>();
+  const [opportunity, setOpportunity] = useState<Opportunity | null>(null);
 
   useEffect(() => {
     async function loadOpportunity() {
@@ -49,7 +49,7 @@ const DetailOpportunity: React.FC = () => {
       }
     }
     loadOpportunity();
-  }, [params, history]);
+  }, [params.id, history]);
 
   return (
     <Container>

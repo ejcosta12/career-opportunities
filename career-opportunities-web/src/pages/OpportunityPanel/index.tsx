@@ -37,7 +37,7 @@ interface Opportunities {
 const OpportunityPanel: React.FC = () => {
   const [opportunities, setOpportunities] = useState<Opportunities[]>([]);
   const [modal, setModal] = useState(false);
-  const [visitor, setVisitor] = useState<Visitor>();
+  const [visitor, setVisitor] = useState<Visitor | null>(null);
 
   useEffect(() => {
     const idVisitor = Number(localStorage.getItem('@id_visitor'));
