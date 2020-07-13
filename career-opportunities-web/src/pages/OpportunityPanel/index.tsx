@@ -10,7 +10,11 @@ import {
 
 import api from '../../services/api';
 
-import { Container } from './styles';
+import {
+  Container,
+  Area1Container,
+  Area2Container,
+} from './styles';
 
 interface Visitor {
   token: string;
@@ -81,7 +85,7 @@ const OpportunityPanel: React.FC = () => {
       }
       <Header />
       <Main>
-        <div className="area1">
+        <Area1Container>
           <div>
             <h4> CARREIRAS </h4>
             <h1>
@@ -95,8 +99,8 @@ const OpportunityPanel: React.FC = () => {
               Cadastrar Currículo
             </Button>
           </div>
-        </div>
-        <div className="area2">
+        </Area1Container>
+        <Area2Container>
           { opportunities.map((value) => (
             <div key={value.local}>
               <h4>
@@ -116,7 +120,7 @@ const OpportunityPanel: React.FC = () => {
               ))}
             </div>
           ))}
-        </div>
+        </Area2Container>
       </Main>
     </Container>
   );

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+`;
 
-.area1 {
+export const Area1Container = styled.div`
   background: #ef4d00;
   flex: 1;
   display: flex;
@@ -41,8 +42,9 @@ export const Container = styled.div`
       }
     }
   }
-}
-.area2 {
+`;
+
+export const Area2Container = styled.div`
   flex: 1;
   padding: 50px;
   overflow-y: auto;
@@ -75,5 +77,4 @@ export const Container = styled.div`
     margin-top: 20px;
     padding: 10px;
   }
-}
 `;

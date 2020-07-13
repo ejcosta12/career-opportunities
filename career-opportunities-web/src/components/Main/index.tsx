@@ -4,8 +4,8 @@ import { Container } from './styles';
 
 type MainProps = AreaHTMLAttributes<HTMLHeadElement>;
 
-const Main: React.FC<MainProps> = ({ children, ...props }) => (
-  <Container {...props}>
+const Main: React.FC<MainProps> = ({ children, ...rest }) => (
+  <Container {...rest}>
     {children}
   </Container>
 );

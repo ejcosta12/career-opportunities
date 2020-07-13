@@ -7,7 +7,11 @@ import {
 
 import api from '../../services/api';
 
-import { Container } from './styles';
+import {
+  Container,
+  Area1Container,
+  Area2Container,
+} from './styles';
 
 interface UrlParams {
   id: string;
@@ -52,7 +56,7 @@ const DetailOpportunity: React.FC = () => {
       <Header />
       { opportunity && (
         <Main>
-          <div className="area1">
+          <Area1Container>
             <div>
               <h4>{opportunity.local}</h4>
               <h1>{opportunity.name}</h1>
@@ -64,11 +68,12 @@ const DetailOpportunity: React.FC = () => {
               <div>
                 <h2> Quem Somos </h2>
                 <p> Nascida em Belo Horizonte.</p>
-                <h2>{opportunity.description}</h2>
+                <h2>Descrição</h2>
+                <p>{opportunity.description}</p>
               </div>
             </div>
-          </div>
-          <div className="area2" />
+          </Area1Container>
+          <Area2Container />
         </Main>
       )}
     </Container>
