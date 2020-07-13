@@ -10,7 +10,7 @@ export const Container = styled.div`
       width: 100%;
       h4 {
         margin-bottom: 40px;
-        color: blue;
+        color: #ef4d00;
       }
       * {
         margin-top: 20px;

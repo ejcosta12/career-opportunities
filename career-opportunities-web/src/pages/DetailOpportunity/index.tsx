@@ -51,7 +51,7 @@ const DetailOpportunity: React.FC = () => {
     <Container>
       <Header />
       { opportunity && (
-        <Main className="main">
+        <Main>
           <div className="area1">
             <div>
               <h4>{opportunity.local}</h4>

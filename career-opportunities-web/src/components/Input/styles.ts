@@ -12,17 +12,17 @@ export const Container = styled.div<Props>`
     border: none;
     border-bottom: 2pt solid #686e78;
     margin-bottom: 20px;
-    color: #0072ff;
+    color: #ef4d00;
   }
   span {
     width: 100%;
     text-align: left;
-    color: #0072ff;
+    color: #ef4d00;
   }
 
 ${({ valueLabel }) => !!valueLabel && css`
     input {
-      border-color: #0072ff;
+      border-color: #ef4d00;
       border-width: 3pt;
     }
 `}

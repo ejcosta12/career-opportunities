@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 
 .area1 {
-  background: blue;
+  background: #ef4d00;
   flex: 1;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@ export const Container = styled.div`
     margin-left: 20%;
     margin-right: 5%;
     h4 {
-      color: #288cec;
+      color: #fffb8d;
       font-weight: normal;
       font-size: 20px;
       margin-bottom: 5px;

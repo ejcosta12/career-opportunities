@@ -25,7 +25,7 @@ export const Container = styled.div`
     }
     button {
       margin-top: 10px;
-      background: #0072ff;
+      background: #ef4d00;
       color: #ffffff;
     }
     @media screen and (max-width: 768px) {
