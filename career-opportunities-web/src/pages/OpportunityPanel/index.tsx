@@ -21,13 +21,17 @@ interface Opportunitie {
   uuId: string;
   name: string;
   description: string;
+  quantity: number;
   local: string;
-  created_at: string;
-  updated_at: string;
+}
+
+interface Opportunities {
+  local: string;
+  opportunities: Opportunitie[];
 }
 
 const OpportunityPanel: React.FC = () => {
-  const [opportunities, setOpportunities] = useState<Opportunitie[]>([]);
+  const [opportunities, setOpportunities] = useState<Opportunities[]>([]);
   const [modal, setModal] = useState(false);
   const [visitor, setVisitor] = useState<Visitor>();
 
@@ -53,7 +57,7 @@ const OpportunityPanel: React.FC = () => {
               idToken: visitor.idVisitor,
             },
           });
-          const allOpportunities: Opportunitie[] = response.data;
+          const allOpportunities: Opportunities[] = response.data;
           setOpportunities(allOpportunities);
         }
       } catch (error) {
@@ -93,17 +97,23 @@ const OpportunityPanel: React.FC = () => {
           </div>
         </div>
         <div className="area2">
-          { opportunities.map((opportunitie) => (
-            <div key={opportunitie.uuId}>
+          { opportunities.map((value) => (
+            <div key={value.local}>
               <h4>
-                {opportunitie.local}
+                {value.local}
               </h4>
-              <Link to="/details/id">
-                <p>
-                  {opportunitie.name}
-                </p>
-                <h3> 30 Vagas </h3>
-              </Link>
+              { value.opportunities.map((opportunitie) => (
+                <Link to="/details/id" key={opportunitie.uuId}>
+                  <p>
+                    {opportunitie.name}
+                  </p>
+                  <h3>
+                    {opportunitie.quantity > 1
+                      ? `${opportunitie.quantity} vagas`
+                      : `${opportunitie.quantity} vaga`}
+                  </h3>
+                </Link>
+              ))}
             </div>
           ))}
         </div>
