@@ -91,9 +91,10 @@ const ModalAddVisitor: React.FC<IModalProps> = ({ isModal, ...rest }) => {
           </Form>
         )}
         { statusForm && (
-          <Form onSubmit={handleSubmit} initialData={{ token: '' }}>
+          <Form onSubmit={handleSubmit}>
             <div>
               <Input
+                autoFocus={!false}
                 nameLabel="Token de acesso"
                 name="token"
               />
