@@ -1,5 +1,5 @@
 <h3 align="center">
-  Inscrição de candidatos em processo seletivos (Em desenvolvimento)
+  Inscrição de candidatos em processos seletivos (Em desenvolvimento)
 </h3>
 
 ## Sobre
